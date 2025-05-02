@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://www.huana-nbp.go.th/index/add_file/P0D284NMon35557.png">
-    <title>ระบบขออนุญาตออกนอกสถานที่</title>
+    <link rel="icon" href="https://www.huana-nbp.go.th/index/add_file/P0D284NMon35557.png" type="image/png">
+    <title>แบบฟอร์มขออนุญาตออกนอกสถานที่</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -310,11 +310,10 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            display: none;
             backdrop-filter: blur(5px);
         }
         
@@ -517,8 +516,230 @@
                 padding: 14px 16px;
             }
         }
+        
+        /* เพิ่ม CSS สำหรับ Custom Time Picker */
+        .time-picker-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .time-picker {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 320px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .time-picker-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .time-display {
+            font-size: 36px;
+            font-weight: 300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .time-display span {
+            display: inline-block;
+            width: 45px;
+            text-align: center;
+        }
+        
+        .time-separator {
+            font-size: 36px;
+            margin: 0 5px;
+        }
+        
+        .period-selector {
+            display: flex;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            flex-direction: column;
+        }
+        
+        .period-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .period-btn.active {
+            color: white;
+            font-weight: 500;
+        }
+        
+        .time-picker-body {
+            padding: 20px;
+        }
+        
+        .time-selector {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .time-column {
+            flex: 1;
+            text-align: center;
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            position: relative;
+        }
+        
+        .time-column::-webkit-scrollbar {
+            display: none; /* Chrome/Safari/Opera */
+        }
+        
+        .time-column::before,
+        .time-column::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .time-column::before {
+            top: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        }
+        
+        .time-column::after {
+            bottom: 0;
+            background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        }
+        
+        .time-item {
+            padding: 10px 0;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .time-item:hover {
+            color: var(--primary);
+        }
+        
+        .time-item.selected {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 22px;
+        }
+        
+        .time-picker-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .time-picker-btn {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: var(--radius-md);
+            font-family: 'Prompt', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .cancel-btn {
+            color: var(--gray);
+        }
+        
+        .cancel-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .confirm-btn {
+            color: var(--primary);
+        }
+        
+        .confirm-btn:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        /* ปรับแต่ง input สำหรับเวลา */
+        .time-input {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .time-input .form-control {
+            padding-right: 40px;
+            cursor: pointer;
+            background-color: var(--white);
+        }
+        
+        .time-input::after {
+            content: '\f017';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 400;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            pointer-events: none;
+        }
+        
+        /* สำหรับ time picker แบบ 24 ชั่วโมง */
+        .time-picker-24hr .period-selector {
+            display: none;
+        }
+        
+        /* เพิ่ม highlight ตรงกลางของ time picker */
+        .time-selector-highlight {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-top: 1px solid rgba(67, 97, 238, 0.3);
+            border-bottom: 1px solid rgba(67, 97, 238, 0.3);
+            pointer-events: none;
+            z-index: 0;
+        }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <div class="app-container">
@@ -526,7 +747,7 @@
             <div class="logo-container">
                 <img src="https://www.huana-nbp.go.th/index/add_file/P0D284NMon35557.png" alt="โลโก้" class="app-logo">
             </div>
-            <h1 class="app-title">ขออนุญาตออกนอกสถานที่</h1>
+            <h1 class="app-title">ระบบขออนุญาตออกนอกสถานที่</h1>
             <p class="app-subtitle">องค์การบริหารส่วนตำบลข่าใหญ่</p>
         </header>
         
@@ -618,15 +839,15 @@
                     <div class="time-input-group">
                         <div class="form-group">
                             <label class="form-label" for="startTimeInput">เวลาเริ่มต้น</label>
-                            <div class="select-wrapper">
-                                <input type="text" id="startTimeInput" name="startTime" class="form-control" required placeholder="เลือกเวลา">
+                            <div class="time-input">
+                                <input type="text" id="startTimeInput" name="startTime" class="form-control" required placeholder="เลือกเวลา" readonly>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label" for="endTimeInput">เวลาสิ้นสุด</label>
-                            <div class="select-wrapper">
-                                <input type="text" id="endTimeInput" name="endTime" class="form-control" required placeholder="เลือกเวลา">
+                            <div class="time-input">
+                                <input type="text" id="endTimeInput" name="endTime" class="form-control" required placeholder="เลือกเวลา" readonly>
                             </div>
                         </div>
                     </div>
@@ -662,40 +883,39 @@
                 <!-- ข้อมูลติดต่อ -->
                 <div class="section">
                     <div class="section-title">
-                        <i class="fas fa-address-card"></i>
+                        <i class="fas fa-phone-alt"></i>
                         <h3>ข้อมูลติดต่อ</h3>
                     </div>
                     
                     <div class="form-group form-floating">
-                        <input type="text" id="contact" name="contact" class="form-control" placeholder=" " required>
-                        <label for="contact">หมายเลขโทรศัพท์</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder=" " required pattern="[0-9]{10}">
+                        <label for="phone">เบอร์โทรศัพท์</label>
                     </div>
-                    
-                    <div class="form-group form-floating">
-                        <input type="text" id="signature" name="signature" class="form-control" placeholder=" " required>
+		       <div class="form-group form-floating">
+                        <input type="text" id="signature" name="signature" class="form-control" placeholder=" " required="">
                         <label for="signature">ลายเซ็น (พิมพ์ชื่อ)</label>
                     </div>
                 </div>
                 
-                <!-- ปุ่มส่งแบบฟอร์ม -->
                 <button type="submit" class="btn btn-submit">
-                    <i class="fas fa-paper-plane"></i> ส่งแบบฟอร์ม
+                    <i class="fas fa-paper-plane"></i>
+                    ส่งแบบฟอร์ม
                 </button>
             </form>
-            
-            <footer class="app-footer">
-                <p>© 2023 องค์การบริหารส่วนตำบลหัวข่าใหญ่</p>
-                <div id="message"></div>
-            </footer>
         </div>
+        
+        <footer class="app-footer">
+            <p>© 2023 องค์การบริหารส่วนตำบลข่าใหญ่</p>
+            <p>พัฒนาโดย งานสารสนเทศ สำนักปลัด</p>
+        </footer>
     </div>
     
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-card">
             <div class="loading-spinner"></div>
-            <div class="loading-text">กำลังดำเนินการ</div>
-            <div class="loading-subtext">กรุณารอสักครู่...</div>
+            <div class="loading-text">กำลังส่งข้อมูล</div>
+            <div class="loading-subtext">โปรดรอสักครู่...</div>
         </div>
     </div>
     
@@ -705,80 +925,223 @@
             <i class="fas fa-check"></i>
         </div>
         <div class="success-text">ส่งข้อมูลสำเร็จ!</div>
-        <div class="success-subtext">แบบฟอร์มขออนุญาตของคุณถูกส่งเรียบร้อยแล้ว กรุณาตรวจสอบข้อมูลในกลุ่มแจ้งเตือน</div>
+        <div class="success-subtext">ระบบได้บันทึกข้อมูลการขออนุญาตของท่านเรียบร้อยแล้ว</div>
     </div>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Custom Time Picker -->
+    <div class="time-picker-container" id="timePickerContainer">
+        <div class="time-picker time-picker-24hr">
+            <div class="time-picker-header">
+                <div class="time-display">
+                    <span id="hourDisplay">09</span>
+                    <span class="time-separator">:</span>
+                    <span id="minuteDisplay">30</span>
+                </div>
+                <div class="period-selector">
+                    <button class="period-btn active" data-period="AM">AM</button>
+                    <button class="period-btn" data-period="PM">PM</button>
+                </div>
+            </div>
+            <div class="time-picker-body">
+                <div class="time-selector">
+                    <div class="time-column" id="hourColumn">
+                        <div class="time-selector-highlight"></div>
+                        <!-- ชั่วโมงจะถูกเพิ่มด้วย JavaScript -->
+                    </div>
+                    <div class="time-column" id="minuteColumn">
+                        <div class="time-selector-highlight"></div>
+                        <!-- นาทีจะถูกเพิ่มด้วย JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <div class="time-picker-footer">
+                <button class="time-picker-btn cancel-btn" id="cancelTimeBtn">ยกเลิก</button>
+                <button class="time-picker-btn confirm-btn" id="confirmTimeBtn">ตกลง</button>
+            </div>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ตั้งค่า Flatpickr สำหรับเลือกเวลา
-            flatpickr("#startTimeInput", {
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: "H:i",
-                time_24hr: true,
-                placeholder: "เลือกเวลาเริ่มต้น"
-            });
+            // กำหนด URL ของ Google Apps Script
+            const scripturl = 'https://script.google.com/macros/s/AKfycbwWDul3bOBRcvzkux0_V5o2uWuwdudV4JQZPjF9F5p0a53gX4Q_NTBoL5FiIB_Z0r_G9Q/exec';
             
-            flatpickr("#endTimeInput", {
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: "H:i",
-                time_24hr: true,
-                placeholder: "เลือกเวลาสิ้นสุด"
-            });
+            // เปลี่ยนช่องเวลาให้เป็น custom time picker
+            const startTimeInput = document.getElementById('startTimeInput');
+            const endTimeInput = document.getElementById('endTimeInput');
+            const timePickerContainer = document.getElementById('timePickerContainer');
+            const hourDisplay = document.getElementById('hourDisplay');
+            const minuteDisplay = document.getElementById('minuteDisplay');
+            const hourColumn = document.getElementById('hourColumn');
+            const minuteColumn = document.getElementById('minuteColumn');
+            const cancelTimeBtn = document.getElementById('cancelTimeBtn');
+            const confirmTimeBtn = document.getElementById('confirmTimeBtn');
             
-            // แสดงข้อความ owner
-            const message = document.getElementById('message');
-            message.innerText = 'BY:Songphon_got';
+            let currentTimeInput = null;
+            let selectedHour = '09';
+            let selectedMinute = '00';
             
-            // จัดการการส่งฟอร์ม
-            document.getElementById('permissionForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                // สร้าง FormData จากฟอร์ม
-                const formData = new FormData(this);
-                
-                // ฟังก์ชันแปลงวันที่เป็นรูปแบบไทย
-                function formatDateToThai(dateInput) {
-                    const date = new Date(dateInput);
-                    const months = [
-                        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-                        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-                    ];
-                    const day = date.getDate();
-                    const month = months[date.getMonth()];
-                    const year = date.getFullYear() + 543; // แปลงเป็นปี พ.ศ.
-                    return `${day} ${month} ${year}`;
+            // สร้างตัวเลือกชั่วโมง (0-23)
+            for (let i = 0; i < 24; i++) {
+                const hour = i.toString().padStart(2, '0');
+                const hourItem = document.createElement('div');
+                hourItem.className = 'time-item';
+                hourItem.textContent = hour;
+                hourItem.dataset.hour = hour;
+                hourColumn.appendChild(hourItem);
+            }
+            
+            // สร้างตัวเลือกนาที (0-59 โดยเพิ่มทีละ 5 นาที)
+            for (let i = 0; i < 60; i += 5) {
+                const minute = i.toString().padStart(2, '0');
+                const minuteItem = document.createElement('div');
+                minuteItem.className = 'time-item';
+                minuteItem.textContent = minute;
+                minuteItem.dataset.minute = minute;
+                minuteColumn.appendChild(minuteItem);
+            }
+            
+            // เมื่อคลิกที่ช่องเวลา
+            function setupTimeInput(inputElement) {
+                inputElement.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentTimeInput = this;
+                    
+                    // ถ้ามีค่าเวลาอยู่แล้ว ให้แสดงค่านั้น
+                    if (this.value) {
+                        const [hour, minute] = this.value.split(':');
+                        selectedHour = hour;
+                        selectedMinute = minute;
+                    } else {
+                        // ถ้าไม่มีค่า ให้ใช้เวลาปัจจุบัน
+                        const now = new Date();
+                        selectedHour = now.getHours().toString().padStart(2, '0');
+                        selectedMinute = Math.floor(now.getMinutes() / 5) * 5;
+                        selectedMinute = selectedMinute.toString().padStart(2, '0');
+                    }
+                    
+                    // อัพเดทการแสดงผล
+                    hourDisplay.textContent = selectedHour;
+                    minuteDisplay.textContent = selectedMinute;
+                    
+                    // เลื่อนไปที่ชั่วโมงและนาทีที่เลือก
+                    scrollToSelected(hourColumn, selectedHour);
+                    scrollToSelected(minuteColumn, selectedMinute);
+                    
+                    // แสดง time picker
+                    timePickerContainer.style.display = 'flex';
+                });
+            }
+            
+            setupTimeInput(startTimeInput);
+            setupTimeInput(endTimeInput);
+            
+            // เมื่อคลิกที่ชั่วโมง
+            hourColumn.addEventListener('click', function(e) {
+                if (e.target.classList.contains('time-item')) {
+                    selectedHour = e.target.dataset.hour;
+                    hourDisplay.textContent = selectedHour;
+                    
+                    // ลบ class selected จากทุกรายการ
+                    hourColumn.querySelectorAll('.time-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // เพิ่ม class selected ให้รายการที่เลือก
+                    e.target.classList.add('selected');
+                    
+                    // เลื่อนไปที่รายการที่เลือก
+                    scrollToSelected(hourColumn, selectedHour);
                 }
+            });
+            
+            // เมื่อคลิกที่นาที
+            minuteColumn.addEventListener('click', function(e) {
+                if (e.target.classList.contains('time-item')) {
+                    selectedMinute = e.target.dataset.minute;
+                    minuteDisplay.textContent = selectedMinute;
+                    
+                    // ลบ class selected จากทุกรายการ
+                    minuteColumn.querySelectorAll('.time-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // เพิ่ม class selected ให้รายการที่เลือก
+                    e.target.classList.add('selected');
+                    
+                    // เลื่อนไปที่รายการที่เลือก
+                    scrollToSelected(minuteColumn, selectedMinute);
+                }
+            });
+            
+            // ฟังก์ชันเลื่อนไปที่รายการที่เลือก
+            function scrollToSelected(column, value) {
+                const selectedItem = column.querySelector(`[data-${column.id.replace('Column', '')}="${value}"]`);
+                if (selectedItem) {
+                    // ลบ class selected จากทุกรายการ
+                    column.querySelectorAll('.time-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // เพิ่ม class selected ให้รายการที่เลือก
+                    selectedItem.classList.add('selected');
+                    
+                    // คำนวณตำแหน่งการเลื่อน
+                    const containerHeight = column.clientHeight;
+                    const itemHeight = selectedItem.clientHeight;
+                    const scrollTop = selectedItem.offsetTop - (containerHeight / 2) + (itemHeight / 2);
+                    
+                    // เลื่อนไปที่ตำแหน่งที่คำนวณได้
+                    column.scrollTop = scrollTop;
+                }
+            }
+            
+            // ปุ่มยกเลิก
+            cancelTimeBtn.addEventListener('click', function() {
+                timePickerContainer.style.display = 'none';
+            });
+            
+            // ปุ่มยืนยัน
+            confirmTimeBtn.addEventListener('click', function() {
+                if (currentTimeInput) {
+                    currentTimeInput.value = `${selectedHour}:${selectedMinute}`;
+                }
+                timePickerContainer.style.display = 'none';
+            });
+            
+            // ปิด time picker เมื่อคลิกนอกพื้นที่
+            timePickerContainer.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    timePickerContainer.style.display = 'none';
+                }
+            });
+            
+            // เมื่อส่งฟอร์ม
+            document.getElementById('permissionForm').addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // จัดการข้อมูลให้เป็น JSON ที่จะส่งไปยัง Google Apps Script
-                const data = {
-                    name: formData.get('name'),
-                    position: formData.get('position'),
-                    department: formData.get('department'),
-                    date: formatDateToThai(formData.get('date')),
-                    destination: formData.get('destination'),
-                    purpose: formData.get('purpose'),
-                    startTime: formData.get('startTime'),
-                    endTime: formData.get('endTime'),
-                    type: formData.get('type'),
-                    vehicle: formData.get('vehicle'),
-                    contact: formData.get('contact'),
-                    signature: formData.get('signature')
-                };
-                
-                // Debug: แสดงข้อมูลที่เตรียมจะส่งไปในคอนโซล
-                console.log("Data being sent to Google Apps Script:", data);
+                // ตรวจสอบว่าฟอร์มถูกต้องหรือไม่
+                if (!this.checkValidity()) {
+                    this.reportValidity();
+                    return;
+                }
                 
                 // แสดง Loading Animation
                 document.getElementById('loadingOverlay').style.display = 'flex';
                 
-                // URL ของ Google Apps Script
-                const scripturl = 'https://script.google.com/macros/s/AKfycbwWDul3bOBRcvzkux0_V5o2uWuwdudV4JQZPjF9F5p0a53gX4Q_NTBoL5FiIB_Z0r_G9Q/exec';
+                // เก็บข้อมูลจากฟอร์ม
+                const formData = new FormData(this);
+                const data = {};
                 
-                                // ส่งข้อมูลไปยัง Google Apps Script
+                for (const [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+                
+                // เพิ่มวันที่และเวลาที่ส่งฟอร์ม
+                const now = new Date();
+                data['submitDateTime'] = now.toLocaleString('th-TH');
+                
+                // ส่งข้อมูลไปยัง Google Apps Script
                 fetch(scripturl, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -880,23 +1243,6 @@
                 }
             `;
             document.head.appendChild(style);
-            
-            // เพิ่มเอฟเฟกต์เมื่อสไลด์ระหว่างส่วนต่างๆ
-            const sections = document.querySelectorAll('.section');
-            let currentSectionIndex = 0;
-            
-            // สร้างปุ่มนำทาง (ถ้าต้องการ)
-            // const createNavigation = () => {
-            //     const nav = document.createElement('div');
-            //     nav.className = 'form-navigation';
-            //     nav.innerHTML = `
-            //         <button type="button" id="prevBtn" class="nav-btn">ย้อนกลับ</button>
-            //         <button type="button" id="nextBtn" class="nav-btn">ถัดไป</button>
-            //     `;
-            //     document.querySelector('.app-body').appendChild(nav);
-            // };
-            
-            // createNavigation();
         });
     </script>
 </body>
